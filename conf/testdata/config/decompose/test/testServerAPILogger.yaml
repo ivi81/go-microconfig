@@ -1,0 +1,10 @@
+---
+test:
+  logger:
+    mode: file
+    path: /tmp/test_mrsict_srvice.log
+    logService:
+      hosts:
+        - db_log_storage_host1
+        - db_log_storage_host2
+      port: 0

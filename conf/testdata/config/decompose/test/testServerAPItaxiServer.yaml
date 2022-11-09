@@ -1,0 +1,8 @@
+---
+test:
+  serverAPI:
+    taxiServer:
+      hosts:
+        - taxi_host1
+        - taxi_host2
+      port: 3
