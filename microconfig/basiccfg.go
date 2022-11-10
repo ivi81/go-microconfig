@@ -1,5 +1,5 @@
 //basiccfg.go - содержит структуры данных общие для конфигураций всех микросервисов структуры
-package conf
+package microconfig
 
 //BasicCfg описывает параметры конфигурации общие для всех микросервисов
 type BasicCfg struct {

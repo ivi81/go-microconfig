@@ -1,11 +1,11 @@
-package conf_test
+package microconfig_test
 
 import (
-	"go-microconfig/conf"
 	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/microconfig"
 	"gopkg.in/yaml.v2"
 )
 
@@ -20,7 +20,7 @@ func TestBasicCfg(t *testing.T) {
 	//тестирование полей базовой структуры BasicCfg
 	t.Run("BasicCfg", func(t *testing.T) {
 
-		testCfg := conf.BasicCfg{}
+		testCfg := microconfig.BasicCfg{}
 		typeName := GetTypeName(testCfg)
 
 		b := LoadTestData(t, "BasicCfg.yaml")
@@ -28,7 +28,7 @@ func TestBasicCfg(t *testing.T) {
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, typeName+": yaml Unmarshal error")
 
-		cfg := conf.BasicCfg{}
+		cfg := microconfig.BasicCfg{}
 		cfg.SetValuesFromEnv("")
 
 		BasicCfgAssert(t, testCfg, cfg, "", "")
@@ -37,7 +37,7 @@ func TestBasicCfg(t *testing.T) {
 	//тестирование полей базовой структуры BasicClientCfg
 	t.Run("BasicClientCfg", func(t *testing.T) {
 
-		testCfg := conf.BasicClientCfg{}
+		testCfg := microconfig.BasicClientCfg{}
 		typeName := GetTypeName(testCfg)
 
 		b := LoadTestData(t, "BasicClientCfg.yaml")
@@ -45,7 +45,7 @@ func TestBasicCfg(t *testing.T) {
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, typeName+": yaml Unmarshal error")
 
-		cfg := conf.BasicClientCfg{}
+		cfg := microconfig.BasicClientCfg{}
 		cfg.SetValuesFromEnv("BASIC_CLIENT")
 
 		BasicClientCfgAssert(t, testCfg, cfg, "", "")
@@ -54,7 +54,7 @@ func TestBasicCfg(t *testing.T) {
 	//тестирование полей базовой структуры BasicServerCfg
 	t.Run("BasicServerCfg", func(t *testing.T) {
 
-		testCfg := conf.BasicServerCfg{}
+		testCfg := microconfig.BasicServerCfg{}
 		typeName := GetTypeName(testCfg)
 
 		b := LoadTestData(t, "BasicServerCfg.yaml")
@@ -62,7 +62,7 @@ func TestBasicCfg(t *testing.T) {
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, typeName+": yaml.Unmarshal error")
 
-		cfg := conf.BasicServerCfg{}
+		cfg := microconfig.BasicServerCfg{}
 		cfg.SetValuesFromEnv("BASIC_SERVER")
 
 		BasicServerCfgAssert(t, testCfg, cfg, "", "")
@@ -71,7 +71,7 @@ func TestBasicCfg(t *testing.T) {
 	//тестирование полей базовой структуры BasicStorageCfg
 	t.Run("BasicStorageCfg", func(t *testing.T) {
 
-		testCfg := conf.BasicStorageCfg{}
+		testCfg := microconfig.BasicStorageCfg{}
 		typeName := GetTypeName(testCfg)
 
 		b := LoadTestData(t, "BasicStorageCfg.yaml")
@@ -79,14 +79,14 @@ func TestBasicCfg(t *testing.T) {
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, typeName+": yaml.Unmarshal error")
 
-		cfg := conf.BasicStorageCfg{}
+		cfg := microconfig.BasicStorageCfg{}
 		cfg.SetValuesFromEnv("")
 		BasicStorageCfgAssert(t, testCfg, cfg, "", "")
 	})
 }
 
 //BasicCfgAssert утверждения для тестирования значений в полях структуры BasicCfg
-func BasicCfgAssert(t *testing.T, testCfg, Cfg conf.BasicCfg, hiLeveTypeName, hiLevelPath string) {
+func BasicCfgAssert(t *testing.T, testCfg, Cfg microconfig.BasicCfg, hiLeveTypeName, hiLevelPath string) {
 
 	_, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -98,7 +98,7 @@ func BasicCfgAssert(t *testing.T, testCfg, Cfg conf.BasicCfg, hiLeveTypeName, hi
 }
 
 //BasicClientCfgAssert утверждения для тестирования значений в полях структуры BasicClientCfg
-func BasicClientCfgAssert(t *testing.T, testCfg, Cfg conf.BasicClientCfg, hiLeveTypeName, hiLevelPath string) {
+func BasicClientCfgAssert(t *testing.T, testCfg, Cfg microconfig.BasicClientCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -106,7 +106,7 @@ func BasicClientCfgAssert(t *testing.T, testCfg, Cfg conf.BasicClientCfg, hiLeve
 }
 
 //BasicClientCfgAssert утверждения для тестирования значений в полях структуры BasicClientCfg
-func BasicServerCfgAssert(t *testing.T, testCfg, Cfg conf.BasicServerCfg, hiLeveTypeName, hiLevelPath string) {
+func BasicServerCfgAssert(t *testing.T, testCfg, Cfg microconfig.BasicServerCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -114,7 +114,7 @@ func BasicServerCfgAssert(t *testing.T, testCfg, Cfg conf.BasicServerCfg, hiLeve
 }
 
 //BasicStorageCfgAssert утверждения для тестирования значений в полях структуры BasicStorageCfg содержащих информацию о соединении с хранилищем
-func BasicStorageCfgAssert(t *testing.T, testCfg, Cfg conf.BasicStorageCfg, hiLeveTypeName, hiLevelPath string) {
+func BasicStorageCfgAssert(t *testing.T, testCfg, Cfg microconfig.BasicStorageCfg, hiLeveTypeName, hiLevelPath string) {
 
 	_, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 

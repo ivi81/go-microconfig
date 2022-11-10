@@ -1,11 +1,11 @@
-package conf_test
+package microconfig_test
 
 import (
-	"go-microconfig/conf"
 	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/microconfig"
 	"gopkg.in/yaml.v2"
 )
 
@@ -16,7 +16,7 @@ func TestBasicServiceCfg(t *testing.T) {
 		t.Skip()
 	}
 
-	testCfg := conf.BasicServiceCfg{}
+	testCfg := microconfig.BasicServiceCfg{}
 	typeName := GetTypeName(testCfg)
 
 	b := LoadTestData(t, "BasicServiceCfg.yaml")
@@ -26,14 +26,14 @@ func TestBasicServiceCfg(t *testing.T) {
 
 	LoadTestEnvData(t, "basicservicecfg.env")
 
-	cfg := conf.BasicServiceCfg{}
+	cfg := microconfig.BasicServiceCfg{}
 	cfg.SetValuesFromEnv("BASIC_SERVICE")
 
 	BasicServiceCfgAssert(t, testCfg, cfg, "", "")
 }
 
 //BasicServiceCfgassert
-func BasicServiceCfgAssert(t *testing.T, testCfg, Cfg conf.BasicServiceCfg, hiLeveTypeName, hiLevelPath string) {
+func BasicServiceCfgAssert(t *testing.T, testCfg, Cfg microconfig.BasicServiceCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 

@@ -1,5 +1,5 @@
 //clientcfg.go - содержит структуры данных описывающие конфигурацию клиентов взаимодействия с микросервисами
-package conf
+package microconfig
 
 import "time"
 

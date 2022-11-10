@@ -1,5 +1,5 @@
 //servicecfg.go - содержит структуры данных описывающие конфигурации интерфейсов взаимодействия микросервисов
-package conf
+package microconfig
 
 //ServiceAPICfg тип данных хранящий информацию о конфигурации API-сервиса
 type ServiceAPICfg struct {

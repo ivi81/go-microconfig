@@ -1,4 +1,4 @@
-package conf
+package microconfig
 
 //BasicServiceCfg описывает базовую (общую для всех) конфигурацию сервиса
 type BasicServiceCfg struct {

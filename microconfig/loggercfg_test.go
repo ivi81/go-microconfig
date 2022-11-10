@@ -1,11 +1,11 @@
-package conf_test
+package microconfig_test
 
 import (
-	"go-microconfig/conf"
 	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/microconfig"
 	"gopkg.in/yaml.v2"
 )
 
@@ -16,7 +16,7 @@ func TestLoggerCfg(t *testing.T) {
 		t.Skip()
 	}
 
-	testCfg := conf.LoggerCfg{}
+	testCfg := microconfig.LoggerCfg{}
 
 	b := LoadTestData(t, "LoggerCfg.yaml")
 
@@ -24,14 +24,14 @@ func TestLoggerCfg(t *testing.T) {
 	assert.NoError(t, err, GetTypeName(testCfg)+": yaml Unmarshal error")
 
 	LoadTestEnvData(t, "loggercfg.env")
-	cfg := conf.LoggerCfg{}
+	cfg := microconfig.LoggerCfg{}
 	cfg.SetValuesFromEnv("")
 
 	LoggerCfgAssert(t, testCfg, cfg, "", "")
 }
 
 //LoggerCfgSute утверждения для тестирования значений в специфичных для структуры LoggerCfg полях
-func LoggerCfgAssert(t *testing.T, testCfg, Cfg conf.LoggerCfg, hiLeveTypeName, hiLevelPath string) {
+func LoggerCfgAssert(t *testing.T, testCfg, Cfg microconfig.LoggerCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 

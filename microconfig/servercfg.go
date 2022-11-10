@@ -1,5 +1,5 @@
 //servercfg.go - содержит структуры данных описывающие конфигурации серверных служб микросервисов
-package conf
+package microconfig
 
 import "time"
 

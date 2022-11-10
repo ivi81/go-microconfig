@@ -1,5 +1,5 @@
 //simpleserver.go - содержит структуры данных описывающие конфигурации элементарных серверов
-package conf
+package microconfig
 
 //WssServerCfg описыввает параметры конфигурации WSS-сервера
 type ServerWssCfg struct {

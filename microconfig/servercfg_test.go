@@ -1,11 +1,11 @@
-package conf_test
+package microconfig_test
 
 import (
-	"go-microconfig/conf"
 	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/microconfig"
 	"gopkg.in/yaml.v2"
 )
 
@@ -19,14 +19,14 @@ func TestServersCfg(t *testing.T) {
 	LoadTestEnvData(t, "servercfg.env")
 
 	t.Run("ServerAPICfg", func(t *testing.T) {
-		testCfg := conf.ServerAPICfg{}
+		testCfg := microconfig.ServerAPICfg{}
 
 		b := LoadTestData(t, "ServerAPICfg.yaml")
 
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, GetTypeName(testCfg)+": yaml Unmarshal error")
 
-		cfg := conf.ServerAPICfg{}
+		cfg := microconfig.ServerAPICfg{}
 		cfg.SetValuesFromEnv("")
 
 		ServerAPICfgAssert(t, testCfg, cfg, "", "")
@@ -35,14 +35,14 @@ func TestServersCfg(t *testing.T) {
 
 	t.Run("ServerAuthCfg", func(t *testing.T) {
 
-		testCfg := conf.ServerAuthCfg{}
+		testCfg := microconfig.ServerAuthCfg{}
 
 		b := LoadTestData(t, "ServerAuthCfg.yaml")
 
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, GetTypeName(testCfg)+": yaml Unmarshal error")
 
-		cfg := conf.ServerAuthCfg{}
+		cfg := microconfig.ServerAuthCfg{}
 		cfg.SetValuesFromEnv("")
 
 		ServerAuthCfgAssert(t, testCfg, cfg, "", "")
@@ -50,7 +50,7 @@ func TestServersCfg(t *testing.T) {
 }
 
 //ServerAPICfgAssert утверждения для тестирования значений в полях структуры ServerAPICfg
-func ServerAPICfgAssert(t *testing.T, testCfg, Cfg conf.ServerAPICfg, hiLeveTypeName, hiLevelPath string) {
+func ServerAPICfgAssert(t *testing.T, testCfg, Cfg microconfig.ServerAPICfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -68,7 +68,7 @@ func ServerAPICfgAssert(t *testing.T, testCfg, Cfg conf.ServerAPICfg, hiLeveType
 }
 
 //ServerAuthCfgSute утверждения для тестирования значений в полях структуры ServerAuthCfg
-func ServerAuthCfgAssert(t *testing.T, testCfg, Cfg conf.ServerAuthCfg, hiLeveTypeName, hiLevelPath string) {
+func ServerAuthCfgAssert(t *testing.T, testCfg, Cfg microconfig.ServerAuthCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 

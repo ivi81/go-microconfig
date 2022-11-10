@@ -1,8 +1,7 @@
-package conf_test
+package microconfig_test
 
 import (
 	"fmt"
-	"go-microconfig/conf"
 
 	"io/ioutil"
 	"log"
@@ -16,6 +15,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
+	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/microconfig"
 )
 
 var (
@@ -88,7 +88,7 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-// TestJoinStr тест вспомогательной функции conf.JoinStr
+// TestJoinStr тест вспомогательной функции microconfig.JoinStr
 func TestJoinStr(t *testing.T) {
 	if testing.Short() {
 		t.Skip()
@@ -102,7 +102,7 @@ func TestJoinStr(t *testing.T) {
 		}
 	)
 	for _, td := range testData {
-		assert.Equal(t, conf.JoinStr(td.A, td.B), td.Result, td.Msg)
+		assert.Equal(t, microconfig.JoinStr(td.A, td.B), td.Result, td.Msg)
 	}
 }
 
@@ -140,14 +140,14 @@ func TestLoad(t *testing.T) {
 	os.Setenv("STAGE", "test")
 	LoadTestEnvData(t, "LoadTest.env")
 
-	testCfg := conf.ServiceAPICfg{}
+	testCfg := microconfig.ServiceAPICfg{}
 	testCfg.SetValuesFromEnv("LOAD_TEST")
 
 	t.Run("OnlyEnvLoad", func(t *testing.T) {
 		// Проверка случая загрузки конфигурации только из переменных окружения
 		os.Setenv("LOAD_TEST_CONFIG_PATH", "./testdata/config/empty")
-		Cfg := conf.ServiceAPICfg{}
-		conf.Load(&Cfg, "LOAD_TEST", false)
+		Cfg := microconfig.ServiceAPICfg{}
+		microconfig.Load(&Cfg, "LOAD_TEST", false)
 
 		ServiceAPICfgAssert(t, testCfg, Cfg, "", "")
 	})
@@ -156,8 +156,8 @@ func TestLoad(t *testing.T) {
 		// Проверка случая загрузки конфигурации только из цельных yaml-файлов (переменных окржения нет)
 
 		os.Setenv("TEST_CONFIG_PATH", "./testdata/config/normal")
-		Cfg := conf.ServiceAPICfg{}
-		conf.Load(&Cfg, "TEST", false)
+		Cfg := microconfig.ServiceAPICfg{}
+		microconfig.Load(&Cfg, "TEST", false)
 
 		ServiceAPICfgAssert(t, testCfg, Cfg, "", "")
 	})
@@ -165,8 +165,8 @@ func TestLoad(t *testing.T) {
 	t.Run("DecomposeLoad", func(t *testing.T) {
 		// Проверка случая загрузки конфигурации из декомпозированных yaml-файлов (переменных окржения нет)
 		os.Setenv("TEST_CONFIG_PATH", "./testdata/config/decompose")
-		Cfg := conf.ServiceAPICfg{}
-		conf.Load(&Cfg, "TEST", false)
+		Cfg := microconfig.ServiceAPICfg{}
+		microconfig.Load(&Cfg, "TEST", false)
 
 		ServiceAPICfgAssert(t, testCfg, Cfg, "", "")
 
@@ -175,8 +175,8 @@ func TestLoad(t *testing.T) {
 		// Проверка случая комбинированной загрузки конфигурации из yaml-файлов и перменных окружения
 
 		os.Setenv("TEST_CONFIG_PATH", "./testdata/config/onlydefaults")
-		Cfg := conf.ServiceAPICfg{}
-		conf.Load(&Cfg, "LOAD_TEST", false)
+		Cfg := microconfig.ServiceAPICfg{}
+		microconfig.Load(&Cfg, "LOAD_TEST", false)
 
 		ServiceAPICfgAssert(t, Cfg, Cfg, "", "")
 	})

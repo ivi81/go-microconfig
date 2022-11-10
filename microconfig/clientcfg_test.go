@@ -1,11 +1,11 @@
-package conf_test
+package microconfig_test
 
 import (
-	"go-microconfig/conf"
 	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/microconfig"
 	"gopkg.in/yaml.v2"
 )
 
@@ -19,13 +19,13 @@ func TestClientsCfg(t *testing.T) {
 
 	t.Run("ClientAuthStorageCfg", func(t *testing.T) {
 
-		testCfg := conf.ClientAuthStorageCfg{}
+		testCfg := microconfig.ClientAuthStorageCfg{}
 		b := LoadTestData(t, "ClientAuthStorageCfg.yaml")
 
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, GetTypeName(testCfg)+": yaml Unmarshal error")
 
-		cfg := conf.ClientAuthStorageCfg{}
+		cfg := microconfig.ClientAuthStorageCfg{}
 		cfg.SetValuesFromEnv("")
 
 		ClienAuthStorageCfgAssert(t, testCfg, cfg, "", "")
@@ -33,13 +33,13 @@ func TestClientsCfg(t *testing.T) {
 
 	t.Run("ClientSTIXStorageCfg", func(t *testing.T) {
 
-		testCfg := conf.ClientSTIXStorageCfg{}
+		testCfg := microconfig.ClientSTIXStorageCfg{}
 		b := LoadTestData(t, "ClientSTIXStorageCfg.yaml")
 
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, GetTypeName(testCfg)+": yaml Unmarshal error")
 
-		cfg := conf.ClientSTIXStorageCfg{}
+		cfg := microconfig.ClientSTIXStorageCfg{}
 		cfg.SetValuesFromEnv("")
 
 		ClienSTIXStorageCfgAssert(t, testCfg, cfg, "", "")
@@ -47,13 +47,13 @@ func TestClientsCfg(t *testing.T) {
 
 	t.Run("ClientNatsCfg", func(t *testing.T) {
 
-		testCfg := conf.ClientNatsCfg{}
+		testCfg := microconfig.ClientNatsCfg{}
 		b := LoadTestData(t, "ClientNatsCfg.yaml")
 
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, GetTypeName(testCfg)+": yaml Unmarshal error")
 
-		cfg := conf.ClientNatsCfg{}
+		cfg := microconfig.ClientNatsCfg{}
 		cfg.SetValuesFromEnv("")
 
 		ClienNatsCfgAssert(t, testCfg, cfg, "", "")
@@ -61,13 +61,13 @@ func TestClientsCfg(t *testing.T) {
 
 	t.Run("ClientAuthCfg", func(t *testing.T) {
 
-		testCfg := conf.ClientAuthCfg{}
+		testCfg := microconfig.ClientAuthCfg{}
 		b := LoadTestData(t, "ClientAuthCfg.yaml")
 
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, GetTypeName(testCfg)+": yaml.Unmarshal error")
 
-		cfg := conf.ClientAuthCfg{}
+		cfg := microconfig.ClientAuthCfg{}
 		cfg.SetValuesFromEnv("")
 
 		ClienAutCfgAssert(t, testCfg, cfg, "", "")
@@ -75,13 +75,13 @@ func TestClientsCfg(t *testing.T) {
 
 	t.Run("ClientLogsStorageCfg", func(t *testing.T) {
 
-		testCfg := conf.ClientLogsStorageCfg{}
+		testCfg := microconfig.ClientLogsStorageCfg{}
 		b := LoadTestData(t, "ClientLogsStorageCfg.yaml")
 
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, GetTypeName(testCfg)+": yaml.Unmarshal error")
 
-		cfg := conf.ClientLogsStorageCfg{}
+		cfg := microconfig.ClientLogsStorageCfg{}
 		cfg.SetValuesFromEnv("")
 
 		ClienLogsStorageCfgAssert(t, testCfg, cfg, "", "")
@@ -90,7 +90,7 @@ func TestClientsCfg(t *testing.T) {
 }
 
 //ClienAuthStorageCfgAssert утверждения для тестирования значений в полях структуры ClienAuthStorageCfg
-func ClienAuthStorageCfgAssert(t *testing.T, testCfg, Cfg conf.ClientAuthStorageCfg, hiLeveTypeName, hiLevelPath string) {
+func ClienAuthStorageCfgAssert(t *testing.T, testCfg, Cfg microconfig.ClientAuthStorageCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -100,7 +100,7 @@ func ClienAuthStorageCfgAssert(t *testing.T, testCfg, Cfg conf.ClientAuthStorage
 }
 
 //ClienSTIXStorageCfgAssert утверждения для тестирования значений в полях структуры ClienAuthStorageCfg
-func ClienSTIXStorageCfgAssert(t *testing.T, testCfg, Cfg conf.ClientSTIXStorageCfg, hiLeveTypeName, hiLevelPath string) {
+func ClienSTIXStorageCfgAssert(t *testing.T, testCfg, Cfg microconfig.ClientSTIXStorageCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -110,7 +110,7 @@ func ClienSTIXStorageCfgAssert(t *testing.T, testCfg, Cfg conf.ClientSTIXStorage
 }
 
 //ClienAuthCfgAssert утверждения для тестирования значений в полях структуры ClienAuthCfg
-func ClienAutCfgAssert(t *testing.T, testCfg, Cfg conf.ClientAuthCfg, hiLeveTypeName, hiLevelPath string) {
+func ClienAutCfgAssert(t *testing.T, testCfg, Cfg microconfig.ClientAuthCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -119,7 +119,7 @@ func ClienAutCfgAssert(t *testing.T, testCfg, Cfg conf.ClientAuthCfg, hiLeveType
 }
 
 // ClienNatsCfgAssert утверждения для тестирования значений в полях структуры ClienNatsCfg
-func ClienNatsCfgAssert(t *testing.T, testCfg, Cfg conf.ClientNatsCfg, hiLeveTypeName, hiLevelPath string) {
+func ClienNatsCfgAssert(t *testing.T, testCfg, Cfg microconfig.ClientNatsCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -147,7 +147,7 @@ func ClienNatsCfgAssert(t *testing.T, testCfg, Cfg conf.ClientNatsCfg, hiLeveTyp
 }
 
 //ClienLogsStorageCfgAssert утверждения для тестирования значений в полях структуры ClienLogsStorageCfg
-func ClienLogsStorageCfgAssert(t *testing.T, testCfg, Cfg conf.ClientLogsStorageCfg, hiLeveTypeName, hiLevelPath string) {
+func ClienLogsStorageCfgAssert(t *testing.T, testCfg, Cfg microconfig.ClientLogsStorageCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 

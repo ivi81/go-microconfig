@@ -1,11 +1,11 @@
-package conf_test
+package microconfig_test
 
 import (
-	"go-microconfig/conf"
 	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/microconfig"
 	"gopkg.in/yaml.v2"
 )
 
@@ -14,42 +14,42 @@ func TestServiceCfg(t *testing.T) {
 	LoadTestEnvData(t, "servicecfg.env")
 
 	t.Run("ServiceAPICfg", func(t *testing.T) {
-		testCfg := conf.ServiceAPICfg{}
+		testCfg := microconfig.ServiceAPICfg{}
 
 		b := LoadTestData(t, "ServiceAPICfg.yaml")
 
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, GetTypeName(testCfg)+": yaml Unmarshal error")
 
-		cfg := conf.ServiceAPICfg{}
+		cfg := microconfig.ServiceAPICfg{}
 		cfg.SetValuesFromEnv("TEST")
 
 		ServiceAPICfgAssert(t, testCfg, cfg, "", "")
 	})
 
 	t.Run("ServiceSTIXStorageCfg", func(t *testing.T) {
-		testCfg := conf.ServiceSTIXStorageCfg{}
+		testCfg := microconfig.ServiceSTIXStorageCfg{}
 
 		b := LoadTestData(t, "ServiceSTIXStorageCfg.yaml")
 
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, GetTypeName(testCfg)+": yaml Unmarshal error")
 
-		cfg := conf.ServiceSTIXStorageCfg{}
+		cfg := microconfig.ServiceSTIXStorageCfg{}
 		cfg.SetValuesFromEnv("TEST")
 
 		ServiceSTIXStorageCfgAssert(t, testCfg, cfg, "", "")
 	})
 
 	t.Run("ServiceAuthCfg", func(t *testing.T) {
-		testCfg := conf.ServiceAuthCfg{}
+		testCfg := microconfig.ServiceAuthCfg{}
 
 		b := LoadTestData(t, "ServiceAuthCfg.yaml")
 
 		err := yaml.Unmarshal(b, &testCfg)
 		assert.NoError(t, err, GetTypeName(testCfg)+": yaml Unmarshal error")
 
-		cfg := conf.ServiceAuthCfg{}
+		cfg := microconfig.ServiceAuthCfg{}
 		cfg.SetValuesFromEnv("TEST")
 
 		ServiceAuthCfgAssert(t, testCfg, cfg, "", "")
@@ -61,7 +61,7 @@ func TestServiceCfg(t *testing.T) {
 // Cfg - структура значения полей которой проверяются
 // hiLeveTypeName - название типа данных в который либо встроенно либо частью которого является testCfg
 // hiLevelPath - текстовый путь в вышестоящей структуре к полю содержащему  testCfg
-func ServiceAPICfgAssert(t *testing.T, testCfg, Cfg conf.ServiceAPICfg, hiLeveTypeName, hiLevelPath string) {
+func ServiceAPICfgAssert(t *testing.T, testCfg, Cfg microconfig.ServiceAPICfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -75,7 +75,7 @@ func ServiceAPICfgAssert(t *testing.T, testCfg, Cfg conf.ServiceAPICfg, hiLeveTy
 }
 
 // ServiceSTIXStorageCfgAssert утверждения для тестирования значений в полях структуры ServiceSTIXStorageCfg
-func ServiceSTIXStorageCfgAssert(t *testing.T, testCfg, Cfg conf.ServiceSTIXStorageCfg, hiLeveTypeName, hiLevelPath string) {
+func ServiceSTIXStorageCfgAssert(t *testing.T, testCfg, Cfg microconfig.ServiceSTIXStorageCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -86,7 +86,7 @@ func ServiceSTIXStorageCfgAssert(t *testing.T, testCfg, Cfg conf.ServiceSTIXStor
 }
 
 // ServiceAuthCfgAssert утверждения для тестирования значений в полях структуры ServiceAuthCfg
-func ServiceAuthCfgAssert(t *testing.T, testCfg, Cfg conf.ServiceAuthCfg, hiLeveTypeName, hiLevelPath string) {
+func ServiceAuthCfgAssert(t *testing.T, testCfg, Cfg microconfig.ServiceAuthCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
