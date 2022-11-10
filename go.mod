@@ -1,4 +1,4 @@
-module gitlab.cloud.gcm/i.ippolitov/go-microconfig.git
+module gitlab.cloud.gcm/i.ippolitov/go-microconfig
 
 go 1.18
 
