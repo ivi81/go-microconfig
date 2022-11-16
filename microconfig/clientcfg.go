@@ -109,6 +109,8 @@ type ClientHttpCfg struct {
 	BearerToken    string        `yaml:"bearerToken"`
 	Timeout        time.Duration `yaml:"timeout"`
 	UserAgent      string        `yaml:"userAgent"`
+	SleepTime      time.Duration `yaml:"sleepTime"`
+	ResponseLimit  int           `yaml:"responseLimit"`
 }
 
 //SetValuesFromEnv загружает в параметры значения перменных окружения среды
@@ -139,5 +141,12 @@ func (cfg *ClientHttpCfg) SetValuesFromEnv(envPrefix string) {
 
 	if userAgent, ok := LookupEnv(JoinStr(envPref, "USER_AGENT")); ok {
 		cfg.UserAgent = userAgent
+	}
+
+	if sleepTime, ok := LookupEnvAsTime(JoinStr(envPref, "SLEEP_TIME")); ok {
+		cfg.SleepTime = sleepTime
+	}
+	if respLimit, ok := LookupEnvAsInt(JoinStr(envPref, "RESPONSE_LIMIT")); ok {
+		cfg.ResponseLimit = respLimit
 	}
 }
