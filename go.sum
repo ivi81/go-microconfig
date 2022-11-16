@@ -17,10 +17,8 @@ github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/
 github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
 github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKsk=
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
-gitlab.cloud.gcm/i.ippolitov/debugging.git v0.0.0-20220622124439-8bc9a9816275 h1:8NDO8NXQNcjXfbUUZdmaSbED38RFXfHo8O7zqXK9O0w=
-gitlab.cloud.gcm/i.ippolitov/debugging.git v0.0.0-20220622124439-8bc9a9816275/go.mod h1:Elv5duvgBwrL1fnSpeZVm++P1MI1pVR6QJ4smbnPMdo=
-gitlab.cloud.gcm/i.ippolitov/debugging.git v0.0.0-20221109122848-69aca373a7b8 h1:WGe2OMg57rRIPvv5Hkz108dODFmoA/A40iPvtpXWGAM=
-gitlab.cloud.gcm/i.ippolitov/debugging.git v0.0.0-20221109122848-69aca373a7b8/go.mod h1:Elv5duvgBwrL1fnSpeZVm++P1MI1pVR6QJ4smbnPMdo=
+gitlab.cloud.gcm/i.ippolitov/debugging v0.0.0-20221109122848-69aca373a7b8 h1:HISFIahs8gTfQEYWG3E7SlA8az390FLvYVXmtWluzHM=
+gitlab.cloud.gcm/i.ippolitov/debugging v0.0.0-20221109122848-69aca373a7b8/go.mod h1:Elv5duvgBwrL1fnSpeZVm++P1MI1pVR6QJ4smbnPMdo=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v2 v2.3.0/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
