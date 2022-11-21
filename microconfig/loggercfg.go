@@ -33,7 +33,7 @@ func (cfg *LoggerCfg) SetValuesFromEnv(envPrefix string) {
 		cfg.LogLevel = level
 	}
 
-	if disableTimeStamp, ok := LookupEnvAsBool(JoinStr(envPrefix, "LOG_LEVEL")); ok {
+	if disableTimeStamp, ok := LookupEnvAsBool(JoinStr(envPrefix, "LOG_DISABLE_TIME_STAMP")); ok {
 		cfg.DisableTimeStamp = disableTimeStamp
 	}
 

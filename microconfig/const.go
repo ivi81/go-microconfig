@@ -6,6 +6,10 @@ const (
 	strENVNameSplitter = "_"
 	strSplitter        = ","
 	hostPortSplitter   = ":"
+
+	StrENVNameSplitter = strENVNameSplitter
+	StrSplitter        = strSplitter
+	HostPortSplitter   = hostPortSplitter
 )
 
 //Константы хранящие префиксы названий в переменных окружения
