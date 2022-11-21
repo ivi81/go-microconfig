@@ -2,6 +2,12 @@ module gitlab.cloud.gcm/i.ippolitov/go-microconfig
 
 go 1.18
 
+retract (
+	v0.1.2
+	v0.1.1
+	v0.1.0
+)
+
 require (
 	github.com/joho/godotenv v1.4.0
 	github.com/spacetab-io/configuration-go v1.2.0
