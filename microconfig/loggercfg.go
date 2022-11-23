@@ -6,17 +6,17 @@ package microconfig
 //- std - вывод сообшений на stdout,
 //- file - запись сообщений в файл,
 //- service - отправка сообщений удаленной службе логирования
-type LoggerCfg struct {
+/*type LoggerCfg struct {
 	Mode             []string             `yaml:"mode"`
 	Path             string               `yaml:"path"`
 	LogService       ClientLogsStorageCfg `yaml:"logService"`
 	LogFormat        string               `yaml:"logFormat"`
 	LogLevel         []string             `yaml:"logLevel"`
 	DisableTimeStamp bool                 `yaml:"disableTimeStamp"`
-}
+}*/
 
 //SetValuesFromEnv загружает в параметры значения перменных окружения среды
-func (cfg *LoggerCfg) SetValuesFromEnv(envPrefix string) {
+/*func (cfg *LoggerCfg) SetValuesFromEnv(envPrefix string) {
 
 	if mode, ok := LookupEnvAsSlice(JoinStr(envPrefix, "LOG_MODE"), strSplitter); ok {
 		cfg.Mode = mode
@@ -39,3 +39,4 @@ func (cfg *LoggerCfg) SetValuesFromEnv(envPrefix string) {
 
 	cfg.LogService.SetValuesFromEnv(envPrefix)
 }
+*/

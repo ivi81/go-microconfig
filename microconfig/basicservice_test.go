@@ -1,16 +1,7 @@
 package microconfig_test
 
-import (
-	"strings"
-	"testing"
-
-	"github.com/stretchr/testify/assert"
-	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/microconfig"
-	"gopkg.in/yaml.v2"
-)
-
 //TestBasicServiceCfg
-func TestBasicServiceCfg(t *testing.T) {
+/*func TestBasicServiceCfg(t *testing.T) {
 
 	if testing.Short() {
 		t.Skip()
@@ -31,9 +22,10 @@ func TestBasicServiceCfg(t *testing.T) {
 
 	BasicServiceCfgAssert(t, testCfg, cfg, "", "")
 }
+*/
 
 //BasicServiceCfgassert
-func BasicServiceCfgAssert(t *testing.T, testCfg, Cfg microconfig.BasicServiceCfg, hiLeveTypeName, hiLevelPath string) {
+/*func BasicServiceCfgAssert(t *testing.T, testCfg, Cfg microconfig.BasicServiceCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -43,3 +35,4 @@ func BasicServiceCfgAssert(t *testing.T, testCfg, Cfg microconfig.BasicServiceCf
 	currentFieldPath = strings.Join([]string{fieldPath, "Logger"}, fieldSpliter)
 	LoggerCfgAssert(t, testCfg.Logger, Cfg.Logger, currentTypeName, currentFieldPath)
 }
+*/

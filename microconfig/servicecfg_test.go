@@ -1,15 +1,6 @@
 package microconfig_test
 
-import (
-	"strings"
-	"testing"
-
-	"github.com/stretchr/testify/assert"
-	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/microconfig"
-	"gopkg.in/yaml.v2"
-)
-
-func TestServiceCfg(t *testing.T) {
+/*func TestServiceCfg(t *testing.T) {
 
 	LoadTestEnvData(t, "servicecfg.env")
 
@@ -54,14 +45,15 @@ func TestServiceCfg(t *testing.T) {
 
 		ServiceAuthCfgAssert(t, testCfg, cfg, "", "")
 	})
-}
+
+}*/
 
 // ServerAuthCfgSute утверждения для тестирования значений в полях структуры ServerAuthCfg:
 // testCfg - структура содержащая проверочные данные
 // Cfg - структура значения полей которой проверяются
 // hiLeveTypeName - название типа данных в который либо встроенно либо частью которого является testCfg
 // hiLevelPath - текстовый путь в вышестоящей структуре к полю содержащему  testCfg
-func ServiceAPICfgAssert(t *testing.T, testCfg, Cfg microconfig.ServiceAPICfg, hiLeveTypeName, hiLevelPath string) {
+/*func ServiceAPICfgAssert(t *testing.T, testCfg, Cfg microconfig.ServiceAPICfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -73,9 +65,9 @@ func ServiceAPICfgAssert(t *testing.T, testCfg, Cfg microconfig.ServiceAPICfg, h
 	currentFieldPath = strings.Join([]string{fieldPath, "ClientAuth"}, fieldSpliter)
 	ClienAutCfgAssert(t, testCfg.ClientAuth, Cfg.ClientAuth, currentTypeName, currentFieldPath)
 }
-
+*/
 // ServiceSTIXStorageCfgAssert утверждения для тестирования значений в полях структуры ServiceSTIXStorageCfg
-func ServiceSTIXStorageCfgAssert(t *testing.T, testCfg, Cfg microconfig.ServiceSTIXStorageCfg, hiLeveTypeName, hiLevelPath string) {
+/*func ServiceSTIXStorageCfgAssert(t *testing.T, testCfg, Cfg microconfig.ServiceSTIXStorageCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -84,9 +76,9 @@ func ServiceSTIXStorageCfgAssert(t *testing.T, testCfg, Cfg microconfig.ServiceS
 	currentFieldPath := strings.Join([]string{fieldPath, "ClientSTIXStorage"}, fieldSpliter)
 	ClienSTIXStorageCfgAssert(t, testCfg.ClientSTIXStorage, Cfg.ClientSTIXStorage, currentTypeName, currentFieldPath)
 }
-
+*/
 // ServiceAuthCfgAssert утверждения для тестирования значений в полях структуры ServiceAuthCfg
-func ServiceAuthCfgAssert(t *testing.T, testCfg, Cfg microconfig.ServiceAuthCfg, hiLeveTypeName, hiLevelPath string) {
+/*func ServiceAuthCfgAssert(t *testing.T, testCfg, Cfg microconfig.ServiceAuthCfg, hiLeveTypeName, hiLevelPath string) {
 
 	currentTypeName, fieldPath := CreateFildPathhiLevel(hiLeveTypeName, hiLevelPath, testCfg)
 
@@ -98,4 +90,4 @@ func ServiceAuthCfgAssert(t *testing.T, testCfg, Cfg microconfig.ServiceAuthCfg,
 
 	currentFieldPath = strings.Join([]string{fieldPath, "ClientAuthStorage"}, fieldSpliter)
 	ClienAuthStorageCfgAssert(t, testCfg.ClientAuthStorage, Cfg.ClientAuthStorage, currentTypeName, currentFieldPath)
-}
+}*/
