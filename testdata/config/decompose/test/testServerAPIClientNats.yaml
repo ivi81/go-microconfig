@@ -1,0 +1,13 @@
+---
+test:
+  clientNats:
+    hosts:
+      - nats_host1
+      - nats_host2
+    port: 3
+    turnOffEcho: true
+    pingInterval: 10m
+    authWithToken: true
+    authWithUser: true
+    authWithCredFile: true
+    tlsOn: true

@@ -1,0 +1,46 @@
+---
+clientNats:
+  hosts:
+    - nats_host1
+    - nats_host2
+  port: 3
+  turnOffEcho: true
+  pingInterval: 10m
+  authWithToken: true
+  authWithUser: true
+  authWithCredFile: true
+  tlsOn: true
+logger:
+  mode: file
+  path: /tmp/test_mrsict_srvice.log
+  logService:
+    hosts:
+      - db_log_storage_host1
+      - db_log_storage_host2
+    port: 0
+serverAPI:
+  wssServer:
+    hosts:
+      - wss_host1
+      - wss_host2
+    port: 1
+  taxiServer:
+    hosts:
+      - taxi_host1
+      - taxi_host2
+    port: 3
+  httpServer:
+    hosts:
+      - http_host1
+      - http_host2
+    port: 2
+  grpcServer:
+    hosts:
+      - grpc_host1
+      - grpc_host2
+    port: 4
+clientAuth:
+  hosts:
+    - auth_host1
+    - auth_host2
+  port: 0

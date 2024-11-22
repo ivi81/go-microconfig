@@ -1,0 +1,38 @@
+---
+defaults:
+  cfgTestClient:
+    hosts:
+      - default_nats_host1
+      - default_nats_host2
+    port: 3
+  logger:
+    logService:
+      hosts:
+        - default_db_log_storage_host1
+        - default_db_log_storage_host2
+  serverAPI:
+    wssServer:
+      hosts:
+        - default_wss_host1
+        - default_wss_host2
+      port: 1
+    taxiServer:
+      hosts:
+        - default_taxi_host1
+        - default_taxi_host2
+      port: 3
+    httpServer:
+      hosts:
+        - default_http_host1
+        - default_http_host2
+      port: 2
+    grpcServer:
+      hosts:
+        - default_grpc_host1
+        - default_grpc_host2
+      port: 4
+  clientAuth:
+    hosts:
+      - default_auth_host1
+      - default_auth_host2
+    port: 0

@@ -1,0 +1,7 @@
+---
+test:
+  clientAuth:
+    hosts:
+      - auth_host1
+      - auth_host2
+    port: 0

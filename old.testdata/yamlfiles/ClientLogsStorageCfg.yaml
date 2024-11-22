@@ -1,0 +1,5 @@
+---
+hosts:
+    - client_log_host1
+    - client_log_host2
+port: 5

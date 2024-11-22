@@ -1,0 +1,5 @@
+---
+hosts:
+    - basic_client_host1
+    - basic_client_host2
+port: 2

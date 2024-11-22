@@ -1,0 +1,11 @@
+---
+hosts:
+    - nats_host1
+    - nats_host2
+port: 3
+turnOffEcho: true
+pingInterval: 10s
+authWithToken: true
+authWithUser: true
+authWithCredFile: true
+tlsOn: true
