@@ -1,8 +1,0 @@
----
-hosts:
-    - auth_host1
-    - auth_host2
-port: 5
-jwtSekretKey: test_secret_key
-jwtSecretKeyFile: /test/secret/test_secret_key_file.txt
-jwtTokenTimeDuration: 10m
