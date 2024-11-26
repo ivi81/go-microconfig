@@ -62,7 +62,6 @@ func PopulateWithEnv(prefix string, s any) (err error) {
 				}
 			}
 		}
-
 	}
 
 	return

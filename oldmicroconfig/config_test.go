@@ -1,4 +1,4 @@
-package microconfig_test
+package oldmicroconfig_test
 
 import (
 	"fmt"
@@ -15,7 +15,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
-	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/microconfig"
+	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/oldmicroconfig"
 )
 
 var (
@@ -102,7 +102,7 @@ func TestJoinStr(t *testing.T) {
 		}
 	)
 	for _, td := range testData {
-		assert.Equal(t, microconfig.JoinStr(td.A, td.B), td.Result, td.Msg)
+		assert.Equal(t, oldmicroconfig.JoinStr(td.A, td.B), td.Result, td.Msg)
 	}
 }
 
