@@ -1,6 +1,7 @@
 package microconfig_test
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"testing"
@@ -112,5 +113,20 @@ func TestLoad(t *testing.T) {
 			assert.Equal(t, "new_db_user", testCfg.Storage.User)
 		}
 	})
+}
 
+func ExampleLoad() {
+
+	type ClientCfg struct{
+		ServerUrl string `yaml:"serverUrl" env:"SERVER_URL"`
+	}
+	Cfg := struct {
+		Client  cfgexample.BasicClientCfg  `yaml:"client" env:"CLIENT"`
+		Server  cfgexample.BasicServerCfg  `yaml:"server" env:"SERVER"`
+		Storage cfgexample.BasicStorageCfg `yaml:"storage" env:"STORAGE"`
+	}{}
+
+	microconfig.Load(&Cfg, "", false)
+	fmt.Println(Cfg)
+	// Output: {{{ 0}} {{ 0}} {  }}
 }
