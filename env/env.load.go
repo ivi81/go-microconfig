@@ -5,6 +5,7 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
+	"time"
 )
 
 // PopulateWithEnv - осуществляет загрузку переменных окружения названия которых указанны ввиде
@@ -70,7 +71,7 @@ func PopulateWithEnv(prefix string, s any) (err error) {
 // assignValue - приведение строкового значения к типу данных поля заполняемой структуры
 func assignValue(field *reflect.Value, value string) error {
 
-	fieldName := field.Type().Name()
+	fieldTypeName := field.Type().Name()
 
 	switch field.Kind() {
 	case reflect.String:
@@ -78,23 +79,32 @@ func assignValue(field *reflect.Value, value string) error {
 		field.SetString(value)
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
 
-		intValue, err := strconv.ParseInt(value, 10, 64)
-		if err != nil {
-			return fmt.Errorf("error parsing int value for field %s: %v", fieldName, err)
+		if fieldTypeName == "Duration" { //Тут обрабатываем если значение поля должно быть временным интервалом
+			timeValue, err := time.ParseDuration(value)
+			if err != nil {
+				return fmt.Errorf("error parsing time value for field %s: %v", fieldTypeName, err)
+			}
+			field.SetInt(int64(timeValue))
+		} else {
+			intValue, err := strconv.ParseInt(value, 10, 64)
+			if err != nil {
+				return fmt.Errorf("error parsing int value for field %s: %v", fieldTypeName, err)
+			}
+			field.SetInt(intValue)
 		}
-		field.SetInt(intValue)
+
 	case reflect.Float32, reflect.Float64:
 
 		floatValue, err := strconv.ParseFloat(value, 64)
 		if err != nil {
-			return fmt.Errorf("error parsing float value for field %s: %v", fieldName, err)
+			return fmt.Errorf("error parsing float value for field %s: %v", fieldTypeName, err)
 		}
 		field.SetFloat(floatValue)
 	case reflect.Bool:
 
 		boolValue, err := strconv.ParseBool(value)
 		if err != nil {
-			return fmt.Errorf("error parsing bool value for field %s: %v", fieldName, err)
+			return fmt.Errorf("error parsing bool value for field %s: %v", fieldTypeName, err)
 		}
 		field.SetBool(boolValue)
 	case reflect.Slice:
@@ -105,7 +115,7 @@ func assignValue(field *reflect.Value, value string) error {
 			field.Set(s)
 		}
 	default:
-		return fmt.Errorf("unsupported type for field %s: %s", fieldName, field.Kind())
+		return fmt.Errorf("unsupported type for field %s: %s", fieldTypeName, field.Kind())
 	}
 	return nil
 }

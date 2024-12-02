@@ -1,19 +1,11 @@
+//utils.go - содержит вспомогательные функции для пактеты env
+
 package env
 
 import (
 	"log"
 	"os"
 )
-
-// InitConfigPath - устанавливает путь в файловой системе из которого грузятся конфигурационные файлы
-func InitConfigPath(envPrefix string) string {
-
-	configPath, ok := os.LookupEnv(JoinStr(envPrefix, "CONFIG_PATH"))
-	if !ok {
-		configPath = "./config"
-	}
-	return configPath
-}
 
 // LookupEnv получает содержимое переменной окружения ввиде строки.
 // Имя переменной предается в параметре key.

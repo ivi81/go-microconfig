@@ -17,7 +17,7 @@ type TestCfg struct {
 	Url            string        `env:"URL"`
 	SameFloatValue float64       `env:"FLOAT_VALUE"`
 	Flag           bool          `env:"FLAG"`
-	Time           time.Duration `env:"Time"`
+	Time           time.Duration `env:"TIME"`
 }
 
 type TestCfg1 struct {
@@ -40,6 +40,7 @@ func TestMain(m *testing.M) {
 			Url:            "http:/test1.url",
 			SameFloatValue: 1.00001,
 			Flag:           true,
+			Time:           time.Duration(6000000000),
 		},
 		TestCfg{
 			Hosts:          []string{"host4", "host5", "host6"},
@@ -47,6 +48,7 @@ func TestMain(m *testing.M) {
 			Url:            "http:/test2.url",
 			SameFloatValue: 1.00002,
 			Flag:           false,
+			Time:           time.Duration(300000000000),
 		},
 	}
 
@@ -156,5 +158,5 @@ func AssertStruct(t *testing.T, cfg *TestCfg, expectedResult TestCfg) {
 	assert.Equal(t, cfg.Url, expectedResult.Url)
 	assert.Equal(t, cfg.SameFloatValue, expectedResult.SameFloatValue)
 	assert.Equal(t, cfg.Flag, expectedResult.Flag)
-	//assert.Equal(t, time.Duration(), testCfg.Time)
+	assert.Equal(t, cfg.Time, expectedResult.Time)
 }
