@@ -1,0 +1,12 @@
+---
+test:
+  client:
+    host: new_client_host1
+    port: 4
+  server:
+      host: new_server_host
+      port: 5
+  storage:
+    user: new_db_user
+    pwd: new_db_pwd
+    db: new_local:db

@@ -1,0 +1,12 @@
+---
+defaults:
+  client:
+    host: client_host1
+    port: 3
+  server:
+      host: server_host
+      port: 2
+  storage:
+    user: db_user
+    pwd: db_pwd
+    db: local:db

@@ -1,0 +1,6 @@
+---
+test:
+  storage:
+    user: new_db_user
+    pwd: new_db_pwd
+    db: new_local:db

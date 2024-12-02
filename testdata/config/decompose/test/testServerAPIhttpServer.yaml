@@ -1,8 +1,0 @@
----
-test:
-  serverAPI:
-    httpServer:
-      hosts:
-        - http_host1
-        - http_host2
-      port: 2
