@@ -12,7 +12,7 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-// Load - главная функция пакета, загружает в переданную структуру данные конфигурации приложения.
+// CfgLoad - главная функция пакета, загружает в переданную структуру данные конфигурации приложения.
 // Сначала загружает данные из набора yaml-файлов а затем из переменных окружения названия которых
 // формируются из envPrefix и значений тега "env" полей заполняемой структуры.
 //
@@ -20,7 +20,7 @@ import (
 //	cfg - ссылка на заполняемую структуру
 //	envPrefix - префикс в названиях перменных окружения
 //	verbose - включение подробного режима работы функции
-func Load(cfg any, envPrefix string, verbose bool) error {
+func CfgLoad(cfg any, envPrefix string, verbose bool) error {
 
 	//Устанавливаем путь в файловой системе из которого грузятся конфигурационные файлы
 	configPath, err := initConfigPath(envPrefix)
@@ -32,17 +32,13 @@ func Load(cfg any, envPrefix string, verbose bool) error {
 
 	//Загружаем конфигурацию из файлов
 	if configBytes, err := config.Read(envStage, configPath, verbose); err != nil {
-		//log.Printf("%s - service config reading error: %+v", debugging.GetInfoAboutFunc(), err)
 		return err
 	} else if err = yaml.Unmarshal(configBytes, cfg); err != nil {
-		//log.Fatalf("%s - config unmarshal error: %v", debugging.GetInfoAboutFunc(), err)
 		return err
-
 	}
 
 	//Перекрываем загруженную конфигурацию из переменных окружения названия которых начинаются с envPrefix
 	if err := env.PopulateWithEnv(envPrefix, cfg); err != nil {
-		//log.Fatalf("%s - filling in from env variables error", debugging.GetInfoAboutFunc())
 		return err
 	}
 	return nil

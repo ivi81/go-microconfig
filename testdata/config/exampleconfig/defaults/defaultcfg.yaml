@@ -1,0 +1,12 @@
+---
+defaults:
+  option1: default_option
+  option2: false
+  option3: 
+    - op1
+    - op2
+    - op3
+  client:
+    serverUrl: https://server.url
+  server:
+      url: 0.0.0.0

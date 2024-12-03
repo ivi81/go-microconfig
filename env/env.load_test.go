@@ -1,3 +1,4 @@
+// env.load_tests.go - содержит тесты пакета env
 package env_test
 
 import (

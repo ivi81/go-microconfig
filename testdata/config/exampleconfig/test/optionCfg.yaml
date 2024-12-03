@@ -1,0 +1,4 @@
+---
+test:
+  option3: [test_op1,test_op2,test_op3]
+  option2: true

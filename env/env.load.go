@@ -1,3 +1,4 @@
+// env.load.go - содержит функции осуществлющие загрузку переменных окружения в структуру данных
 package env
 
 import (
@@ -28,15 +29,6 @@ func PopulateWithEnv(prefix string, s any) (err error) {
 
 		valueField := val.Field(i)
 		typeField := val.Type().Field(i)
-
-		//обработка вложенной структуры
-		/*_, ok := typeField.Tag.Lookup("obj")
-		if ok && valueField.Kind() == reflect.Struct {
-			if err = PopulateWithEnv(prefix, valueField.Addr().Interface()); err != nil {
-				return
-			}
-			continue
-		}*/
 
 		if tag, ok := typeField.Tag.Lookup("env"); ok {
 			fields := strings.Split(tag, ",")
@@ -92,7 +84,6 @@ func assignValue(field *reflect.Value, value string) error {
 			}
 			field.SetInt(intValue)
 		}
-
 	case reflect.Float32, reflect.Float64:
 
 		floatValue, err := strconv.ParseFloat(value, 64)
