@@ -1,5 +1,0 @@
----
-hosts:
-    - basichost1
-    - basichost2
-port: 1

@@ -10,6 +10,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
+
 	"gitlab.cloud.gcm/i.ippolitov/go-microconfig"
 	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/env"
 	cfgexample "gitlab.cloud.gcm/i.ippolitov/go-microconfig/example"

@@ -1,5 +1,0 @@
----
-hosts:
-    - wss_host1
-    - wss_host2
-port: 1

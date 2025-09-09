@@ -1,8 +1,0 @@
----
-hosts:
-    - db_auth_storage_host1
-    - db_auth_storage_host2
-port: 1
-user: db_auth_storage_user
-pwd: db_auth_storage_pwd
-db: auth_storage_db_name

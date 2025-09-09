@@ -7,10 +7,18 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/ivi81/enummethods/enumerator"
 )
 
+// Enumerator интерфейсный для работы с нестроковыми константами
+type Enumerator interface {
+	enumerator.Unstringer
+	enumerator.Validator
+}
+
 // PopulateWithEnv - осуществляет загрузку переменных окружения названия которых указанны ввиде
-// значения тэга c названием 'env' поля структуры.
+// значения тэга 'env' для поля структуры.
 //
 //	параметры:
 //	prefix - префикс названия переменной
@@ -62,8 +70,27 @@ func PopulateWithEnv(prefix string, s any) (err error) {
 
 // assignValue - приведение строкового значения к типу данных поля заполняемой структуры
 func assignValue(field *reflect.Value, value string) error {
+	if !field.CanSet() {
+		return fmt.Errorf("field is not settable")
+	}
+	fieldType := field.Type()
+	fieldTypeName := fieldType.Name()
 
-	fieldTypeName := field.Type().Name()
+	if field.CanAddr() {
+		addr := field.Addr()
+		if addr.IsValid() {
+			// Проверяем интерфейс Enumerator
+			if enumerator, ok := addr.Interface().(Enumerator); ok {
+				if enumerator.SetValue(value) {
+					if !enumerator.IsValid() {
+						return fmt.Errorf("not valid value %s for type %s", value, fieldTypeName)
+					}
+					return nil
+				}
+				return fmt.Errorf("SetValue failed for value %s and type %s", value, fieldTypeName)
+			}
+		}
+	}
 
 	switch field.Kind() {
 	case reflect.String:
@@ -71,19 +98,35 @@ func assignValue(field *reflect.Value, value string) error {
 		field.SetString(value)
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
 
-		if fieldTypeName == "Duration" { //Тут обрабатываем если значение поля должно быть временным интервалом
+		if fieldType == reflect.TypeOf(time.Duration(0)) { //Тут обрабатываем если значение поля должно быть временным интервалом
 			timeValue, err := time.ParseDuration(value)
 			if err != nil {
 				return fmt.Errorf("error parsing time value for field %s: %v", fieldTypeName, err)
 			}
 			field.SetInt(int64(timeValue))
+
+			/*if fieldTypeName == "Duration" { //Тут обрабатываем если значение поля должно быть временным интервалом
+			timeValue, err := time.ParseDuration(value)
+			if err != nil {
+				return fmt.Errorf("error parsing time value for field %s: %v", fieldTypeName, err)
+			}
+			field.SetInt(int64(timeValue))*/
+
 		} else {
+
 			intValue, err := strconv.ParseInt(value, 10, 64)
 			if err != nil {
 				return fmt.Errorf("error parsing int value for field %s: %v", fieldTypeName, err)
 			}
 			field.SetInt(intValue)
 		}
+	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+
+		uintValue, err := strconv.ParseUint(value, 10, 64)
+		if err != nil {
+			return fmt.Errorf("error parsing uint value: %w", err)
+		}
+		field.SetUint(uintValue)
 	case reflect.Float32, reflect.Float64:
 
 		floatValue, err := strconv.ParseFloat(value, 64)
