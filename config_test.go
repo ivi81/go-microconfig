@@ -18,7 +18,7 @@ import (
 
 const (
 	SERVICENAME = "SERVICE_TEST"
-	ENABLEDEBUG = true
+	ENABLEDEBUG = false
 )
 
 func TestMain(m *testing.M) {
