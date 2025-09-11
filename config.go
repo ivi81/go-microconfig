@@ -5,11 +5,12 @@
 package microconfig
 
 import (
-	config "github.com/spacetab-io/configuration-go"
-	"github.com/spacetab-io/configuration-go/stage"
-	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/env"
+	"context"
 
+	config "github.com/spacetab-io/configuration-go"
 	"gopkg.in/yaml.v2"
+
+	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2/env"
 )
 
 // CfgLoad - главная функция пакета, загружает в переданную структуру данные конфигурации приложения.
@@ -28,10 +29,10 @@ func CfgLoad(cfg any, envPrefix string, verbose bool) error {
 		return err
 	}
 
-	envStage := stage.NewEnvStage("development")
+	envStage := config.NewEnvStage("development") //stage.NewEnvStage("development")
 
 	//Загружаем конфигурацию из файлов
-	if configBytes, err := config.Read(envStage, configPath, verbose); err != nil {
+	if configBytes, err := config.Read(context.TODO(), envStage, config.WithConfigPath(configPath)); err != nil {
 		return err
 	} else if err = yaml.Unmarshal(configBytes, cfg); err != nil {
 		return err

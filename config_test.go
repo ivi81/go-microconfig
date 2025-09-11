@@ -11,14 +11,14 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 
-	"gitlab.cloud.gcm/i.ippolitov/go-microconfig"
-	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/env"
-	cfgexample "gitlab.cloud.gcm/i.ippolitov/go-microconfig/example"
+	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2"
+	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2/env"
+	cfgexample "gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2/example"
 )
 
 const (
 	SERVICENAME = "SERVICE_TEST"
-	ENABLEDEBUG = false
+	ENABLEDEBUG = true
 )
 
 func TestMain(m *testing.M) {
@@ -37,7 +37,7 @@ func TestLoad(t *testing.T) {
 		EnvPrefixAsServiceName := os.Getenv(env.JoinStr("SERVICE_TEST_NOT_EXIST_CONFIG", "NAME"))
 		err := microconfig.CfgLoad(&testCfg, EnvPrefixAsServiceName, ENABLEDEBUG)
 		if assert.Error(t, err) {
-			assert.ErrorContains(t, err, "no such file or directory")
+			assert.Errorf(t, err, "no such file or directory")
 		}
 	})
 	t.Run("TEST1 : Load from empty folders", func(t *testing.T) {
@@ -45,7 +45,7 @@ func TestLoad(t *testing.T) {
 		EnvPrefixAsServiceName := os.Getenv(env.JoinStr("SERVICE_TEST_EMPTY_CONFIG", "NAME"))
 		err := microconfig.CfgLoad(&testCfg, EnvPrefixAsServiceName, ENABLEDEBUG)
 		if assert.Error(t, err) {
-			assert.ErrorContains(t, err, "no default config")
+			assert.Errorf(t, err, "no default config")
 		}
 	})
 

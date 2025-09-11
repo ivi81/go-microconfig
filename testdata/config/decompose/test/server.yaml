@@ -1,5 +1,5 @@
 ---
 test:
   server:
-      host: new_server_host
-      port: 5
+    host: new_server_host
+    port: 5

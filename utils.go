@@ -2,7 +2,7 @@
 
 package microconfig
 
-import "gitlab.cloud.gcm/i.ippolitov/go-microconfig/env"
+import "gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2/env"
 
 // initConfigPath - устанавливает путь в файловой системе из которого грузятся конфигурационные файлы
 func initConfigPath(envPrefix string) (string, error) {

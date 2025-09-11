@@ -9,8 +9,8 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
-	testcons "gitlab.cloud.gcm/i.ippolitov/go-microconfig/env/test_cons"
-	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/env"
+	testcons "gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2/env/test_cons"
+	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2/env"
 )
 
 type TestCfg struct {
