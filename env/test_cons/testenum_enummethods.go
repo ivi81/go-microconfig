@@ -36,13 +36,13 @@ func (m *TestEnum) UnmarshalJSON(data []byte) error {
 
 
 //MarshalYAML - реализует метод интерфейса yaml.Marshaler
-func (m TestEnum) MarshalYAML() ([]byte, error) {
+func (m TestEnum) MarshalYAML() (interface{}, error) {
 	return enumerator.MarshalYAML(m)
 }
 
-//UnmarshalYAML - реализует метод интерфейса json.UnMarshaler
-func (m *TestEnum) UnmarshalYAML(data []byte) error {
-	return enumerator.UnmarshalYAML(m, data)
+//UnmarshalYAML - реализует метод интерфейса yaml.UnMarshaler
+func (m *TestEnum) UnmarshalYAML(unmarshal func(interface{}) error) error {
+	return enumerator.UnmarshalYAML(m, unmarshal)
 }
 
 
