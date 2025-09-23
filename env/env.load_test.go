@@ -9,18 +9,19 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
-	testcons "gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2/env/test_cons"
 	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2/env"
+	testcons "gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2/env/test_cons"
 )
 
 type TestCfg struct {
-	Hosts          []string          `env:"HOSTS"`
-	Port           int               `env:"PORT"`
-	Url            string            `env:"URL"`
-	SameFloatValue float64           `env:"FLOAT_VALUE"`
-	Flag           bool              `env:"FLAG"`
-	Time           time.Duration     `env:"TIME"`
-	Enum           testcons.TestEnum `env:"ENUM"`
+	Hosts          []string            `env:"HOSTS"`
+	Port           int                 `env:"PORT"`
+	Url            string              `env:"URL"`
+	SameFloatValue float64             `env:"FLOAT_VALUE"`
+	Flag           bool                `env:"FLAG"`
+	Time           time.Duration       `env:"TIME"`
+	EnumSlice      []testcons.TestEnum `env:"ENUM_SLICE"`
+	Enum           testcons.TestEnum   `env:"ENUM"`
 }
 
 type TestCfg1 struct {
@@ -44,7 +45,8 @@ func TestMain(m *testing.M) {
 			SameFloatValue: 1.00001,
 			Flag:           true,
 			Time:           time.Duration(6000000000),
-			Enum:           testcons.STRING1,
+			EnumSlice:      []testcons.TestEnum{testcons.STRING1, testcons.STRING2},
+			Enum:           testcons.STRING2,
 		},
 		TestCfg{
 			Hosts:          []string{"host4", "host5", "host6"},
@@ -53,6 +55,7 @@ func TestMain(m *testing.M) {
 			SameFloatValue: 1.00002,
 			Flag:           false,
 			Time:           time.Duration(300000000000),
+			EnumSlice:      []testcons.TestEnum{testcons.STRING2, testcons.STRING1},
 			Enum:           testcons.STRING2,
 		},
 	}
@@ -65,13 +68,13 @@ func TestPopulateWithEnv(t *testing.T) {
 	t.Run("Test0: Передача nil в качестве указателя на структуру в env.PopulateWithEnv ", func(t *testing.T) {
 
 		err := env.PopulateWithEnv("", nil)
-		assert.EqualError(t, err, "reflect: call of reflect.Value.Elem on zero Value")
+		assert.EqualError(t, err, "expected non-nil pointer to struct")
 	})
 
-	t.Run("Test1: Передача непосредственно экземпляра структуры в env.PopulateWithEnv ", func(t *testing.T) {
+	t.Run("Test1: Передача непосредственно экземпляра пустой структуры в env.PopulateWithEnv ", func(t *testing.T) {
 		testCfg := struct{}{}
 		err := env.PopulateWithEnv("", testCfg)
-		assert.EqualError(t, err, "reflect: call of reflect.Value.Elem on struct Value")
+		assert.EqualError(t, err, "expected non-nil pointer to struct")
 	})
 
 	t.Run("Test2: Загрузка переменных окружения в пустую структуру ", func(t *testing.T) {
@@ -165,4 +168,5 @@ func AssertStruct(t *testing.T, cfg *TestCfg, expectedResult TestCfg) {
 	assert.Equal(t, cfg.Flag, expectedResult.Flag)
 	assert.Equal(t, cfg.Time, expectedResult.Time)
 	assert.Equal(t, cfg.Enum, expectedResult.Enum)
+	assert.Equal(t, cfg.EnumSlice, expectedResult.EnumSlice)
 }
