@@ -6,6 +6,7 @@ package microconfig
 
 import (
 	"context"
+	"fmt"
 
 	config "github.com/spacetab-io/configuration-go"
 	"gopkg.in/yaml.v2"
@@ -22,26 +23,32 @@ import (
 //		envPrefix - префикс в названиях перменных окружения
 //		verbose - включение подробного режима работы функции, в данной версии не работает т.к. в
 //	           github.com/spacetab-io/configuration-go@v1.3.0 не реализовано логирование, есть только stub логера.
-func CfgLoad(cfg any, envPrefix string, verbose bool) error {
+func CfgLoad(cfg any, envPrefix string, verbose bool) (err error) {
+	var (
+		configPath  string
+		configBytes []byte
+	)
+
+	//Суть вносимых измененний относительно v2.0.4 иметь возможность загрузить переменные окружения в конфигурацию, а не быть жестко привязанным в случае неудачи
+	// к загрузке конфигурации из файлов. Хочется сделать этапы чтения файлов и переменных окружения друг от друга. В v2.0.4 если не задана CONFIG_PATH и STAGE
+	// либо нет папок с конфигами то чтение конфигурации прекращается/
 
 	//Устанавливаем путь в файловой системе из которого грузятся конфигурационные файлы
-	configPath, err := initConfigPath(envPrefix)
+	if configPath, err = initConfigPath(envPrefix); err == nil {
+		//Устанавливаем название среды для которой требуется загрузить конфигурацию
+		envStage := config.NewEnvStage("development")
+		//Загружаем конфигурацию из файлов
+		if configBytes, err = config.Read(context.TODO(), envStage, config.WithConfigPath(configPath)); err == nil {
+			if err = yaml.Unmarshal(configBytes, cfg); err != nil {
+				return
+			}
+		}
+	}
 	if err != nil {
-		return err
+		fmt.Errorf("%s", err)
+		err = nil
 	}
-
-	envStage := config.NewEnvStage("development") //stage.NewEnvStage("development")
-
-	//Загружаем конфигурацию из файлов
-	if configBytes, err := config.Read(context.TODO(), envStage, config.WithConfigPath(configPath)); err != nil {
-		return err
-	} else if err = yaml.Unmarshal(configBytes, cfg); err != nil {
-		return err
-	}
-
 	//Перекрываем загруженную конфигурацию из переменных окружения названия которых начинаются с envPrefix
-	if err := env.PopulateWithEnv(envPrefix, cfg); err != nil {
-		return err
-	}
-	return nil
+	err = env.PopulateWithEnv(envPrefix, cfg)
+	return
 }
