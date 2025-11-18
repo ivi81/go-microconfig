@@ -1,4 +1,4 @@
-//error.go - содержит описание типов ошибок
+// error.go - содержит описание типов ошибок
 package env
 
 type envError string
