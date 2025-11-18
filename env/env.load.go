@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ivi81/enummethods/enumerator"
+	"sourcecraft.dev/ivi-ippolitov/enummethods/enumerator"
 )
 
 // Enumerator интерфейсный для работы с нестроковыми константами
@@ -23,7 +23,6 @@ type Enumerator interface {
 //	prefix - префикс названия переменной
 //	s - заполняемая структура данных
 func PopulateWithEnv(prefix string, s any) (err error) {
-
 	defer func() {
 		if r := recover(); r != nil {
 			err = fmt.Errorf("panic in PopulateWithEnv: %v", r)
@@ -91,7 +90,7 @@ func assignValue(field *reflect.Value, value string) error {
 		field.SetString(value)
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
 
-		if fieldType == reflect.TypeOf(time.Duration(0)) { //Тут обрабатываем если значение поля должно быть временным интервалом
+		if fieldType == reflect.TypeOf(time.Duration(0)) { // Тут обрабатываем если значение поля должно быть временным интервалом
 			timeValue, err := time.ParseDuration(value)
 			if err != nil {
 				return fmt.Errorf("error parsing duration: %w", err)
@@ -149,7 +148,6 @@ func assignValue(field *reflect.Value, value string) error {
 
 // Проверяет, реализует ли тип интерфейс Enumerator
 func isEnumeratorType(t reflect.Type) bool {
-
 	enumeratorInterfaceType := reflect.TypeOf((*Enumerator)(nil)).Elem()
 	if t.Implements(enumeratorInterfaceType) {
 		return true
@@ -163,7 +161,6 @@ func isEnumeratorType(t reflect.Type) bool {
 	}
 
 	return false
-
 }
 
 // Универсальная установка значения для Enumerator

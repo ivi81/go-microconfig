@@ -1,13 +1,13 @@
-module gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2
+module sourcecraft.dev/ivi-ippolitov/go-microconfig/v2
 
 go 1.25.1
 
 require (
-	github.com/ivi81/enummethods v1.0.1
 	github.com/joho/godotenv v1.5.1
 	github.com/spacetab-io/configuration-go v1.3.0
 	github.com/stretchr/testify v1.9.0
 	gopkg.in/yaml.v2 v2.4.0
+	sourcecraft.dev/ivi-ippolitov/enummethods v1.1.1
 )
 
 require (

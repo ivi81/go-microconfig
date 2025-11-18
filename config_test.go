@@ -11,9 +11,9 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 
-	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2"
-	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2/env"
-	cfgexample "gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2/example"
+	"sourcecraft.dev/ivi-ippolitov/go-microconfig/v2"
+	"sourcecraft.dev/ivi-ippolitov/go-microconfig/v2/env"
+	cfgexample "sourcecraft.dev/ivi-ippolitov/go-microconfig/v2/example"
 )
 
 const (

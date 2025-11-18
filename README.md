@@ -3,9 +3,9 @@
 В данной библиотеке совмещен функционал позволяющий заружать настройки приложения из набора yaml-файлов и переменных окружения среды. Значения настроек в yaml-файлах и переменных среды могут дополнять либо перекрывать друг друга.
 
 ## Установка
-* Установка последней версии *go get gitlab.cloud.gcm/i.ippolitov/go-microconfig* 
-* Установка вместе с последним коммитом из main *go get gitlab.cloud.gcm/i.ippolitov/go-microconfig@main*
-* Обновление до последней минорной версии *go get -u gitlab.cloud.gcm/i.ippolitov/go-microconfig*
+* Установка последней версии *go get sourcecraft.dev/ivi-ippolitov/enummethods* 
+* Установка вместе с последним коммитом из main *go get go get sourcecraft.dev/ivi-ippolitov/enummethods@main*
+* Обновление до последней минорной версии *go get -u go get sourcecraft.dev/ivi-ippolitov/enummethods*
 
 ## Условия и порядок работы модуля
 Для того чтобы модуль читал конфигурацию из yaml-файлов предназначенную для конкретной среды выполнения (DEV, STAGE, TEST, PROD и т.д) необходимо задание следующих преременных окружения:

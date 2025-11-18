@@ -10,7 +10,7 @@ import (
 	config "github.com/spacetab-io/configuration-go"
 	"gopkg.in/yaml.v2"
 
-	"gitlab.cloud.gcm/i.ippolitov/go-microconfig/v2/env"
+	"sourcecraft.dev/ivi-ippolitov/go-microconfig/v2/env"
 )
 
 // CfgLoad - главная функция пакета, загружает в переданную структуру данные конфигурации приложения.
